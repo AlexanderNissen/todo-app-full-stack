@@ -4,6 +4,8 @@ import './index.css';
 import App from './App';
 import reportWebVitals from './reportWebVitals';
 
+// The reactDOM API renders the App component in the HTML div-element with the id 'root'.
+// div-elements define a division or section of the HTML document
 const root = ReactDOM.createRoot(document.getElementById('root'));
 root.render(
   <React.StrictMode>
