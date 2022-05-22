@@ -119,3 +119,4 @@ rather than actually calling the method.
 - Any action performed on a button is called a CLICK EVENT in HTML terms
 - In React, an action performed on a component is called a SYNTHETICEVENT
 - CONTROLLED FIELD/CONTROLLED COMPONENT = a component where the entire change in the UI is dictated by the state
+- To avoid having to write methods for handling changes in each form element, we can write a single method used amongst different form elements
