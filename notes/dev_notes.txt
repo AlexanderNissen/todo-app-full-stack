@@ -122,3 +122,20 @@ rather than actually calling the method.
 - To avoid having to write methods for handling changes in each form element, we can write a single method used amongst different form elements
 - We can write components (in this case functions) to conditionally return elements when a state variable e.g. is true. 
 This is how we've added conditional login messages depending on successful or failed authentication against hardcoded credentials
+- In Javascript
+	true && "Test String" // evaluates to: "Test String"
+	false && "Test String" // evaluates to: false
+This is the reason why the
+- Anything in a JSX expression compiles to JavaScript. So we can write
+	{this.state.hasLoginFailed && <div>Invalid Credentials</div>}
+To return the div-element if the boolean state variable is true. This is, however, slightly less readable.
+- React Router (a framework) helps us route from one component to another component
+React is just a library for building a view - thus, routing is not a part of it's scope
+- To add a dependency (e.g. React Rotuer) to the package.json, write:
+	npm add react-router-dom
+First it's downloaded into the npm packages, and then inserted into package.json
+- In the React Router V6 framework, the keyword 'exact' is obsolote when ambiguity exists w.r.t. a URL, thus making use of correct ordering of routes irrelevant
+Instead, closest route match is chosen
+- <BrowserRouter> are a <Router> for use in web browsers
+- <Routes> is a container for for a nested tree of elements that renders the branch that best matches the current location
+- <Route> declares an element that should be rendered at a certain URL path. We render LoginComponent and WelcomeComponent
