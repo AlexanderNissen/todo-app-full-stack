@@ -1,0 +1,124 @@
+##### Dev Notes #####
+
+
+****** Getting Started With React - Basics with Components ******
+
+*** Project Structure ***
+- package.json is for JavaScript projects what pom.xml is for Maven-based Java projects
+- once dependencies are specified in package.json, npm installs them in node_modules
+- node_modules directory can be thought of as local Maven repository or target directory in Java projects
+- directory 'public' contains index.html, which is served when connecting to localhost (our web app). It is here code in 'src' folder is injected
+- directory 'src' contains:
+	- 'App.js' contains code for react app component
+	- 'App.css' contains styling of react app component
+	- 'App.test.js' contains unit tests for react app component (tests right beside source code is normal in frontend world)
+ 	- 'index.css' contains styling of entire application
+	- 'index.js' contains code for entire application
+
+*** React Components ***
+- React components help us design elements/functionality as independent reusable pieces of code -> modular approach
+- Components consist of:
+	- View (using JSX = JavaScript extension or vanilla JavaScript)
+	- Logic (JavaScript)
+	- Styling (CSS; inserted into componentName.css)
+	- State (internal data store)
+	- Props (pass data) = properties
+- By extending class Component and implementing render(), a user defined class be rendered into the DOM
+- There are class components (CCs) and function components (FCs)
+- Best practice is to create a .js-file for each component
+- Classes are declared using keyword 'class'
+- Functions are declared using keywork 'function' -> the contents of the render() method in a Component-extending class can be moved to a declared function component
+- Function components are simply functions
+- Function components are faster to write than class components -> use function components for simple components
+- Class components have more features including state -> use class components for more advanced components
+- User-defined components MUST begin with a capital letter
+- Semicolon ';' is not required in 99% of JavaScript
+
+*** JSX & Babel ***
+- Babel converts JSX to JavaScript and comes bundled with create-react-app. JavaScript can be run in the browser
+- Babel can be used to compile JS written using the latest version to older versions of JS ensuring wider browser compatibility
+- Explore conversion of JSX to JavaScript at https://babeljs.io/repl
+- It's not possible to return two elements -> solve by wrapping in parent element. See below:
+
+<div>
+  <h1>First heading</h1>
+  <h2>Second heading</h2>
+</div>
+
+- Parent elements can be empty, e.g. <></>. This is called a React.fragment
+- In JSX, all elements must be closed (<br> is valid HTML, but not valid JSX)
+- JSX expressions in return statement must either be enclosed in parentheses or begin at the same line as the 'return' keyword
+- When using JSX, React MUST be among the imports (JS-lingo: React must be in scope)
+
+*** Refactoring components ***
+- Each component ought to be in own file
+- Each .js-file is called a module in JavaScript
+- Each module must import React as well (import React, { Component } from 'react';)
+- Use keyword 'export' to make a component importable from other modules
+- If keywords 'export default' is used, we can use 'import ComponentName from path_to_module'
+- If 'default' is omitted, we must use the curly braces, i.e. 'import {ComponentName} from path_to_module'
+- If multiple components are in same module, components can be defined without 'export'. Instead, write 'export default ComponentName;' at the bottom of the module
+- Put components in a components directory, i.e. src/components
+
+
+****** Next Steps With React - Building Counter Application ******
+- Unlike in Java, the file name (module name) needn't match the name of the class (component) it contains
+- Virtual DOM is a in-memory representation of the DOM. The app creates the virtual DOM, which reads and updates the actual based on diffs (changes in state)
+- To make a <button /> clickable, add the attribute onClick (must be camelCase for JSX) and pass the JavaScript function - but don't invoke it; e.g.:
+	<button onClick={someMethod}>0</button>
+- When a component has state, use a class instead of a function
+- Functions/methods defined within the scope of a class in React, must be bound explicitly to the class in the constructor
+- JS's arrow functions are similar to the Java lambda functions. Example:
+	var list = [1, 2, 3, 4]
+	list.forEach(x => console.log(2*x))
+- Arrow functions eliminate the need to bind the function
+- Inline JS can be embedded in the attributes of JSX elements for example as an alternative to styling the elements using CSS:
+	
+	class Counter extends Component {
+		let style = {fontSize: "50px", padding: "15px 30px"};
+		render() {
+			return (
+			<div Classname="counter">
+				<button onClick={someJSMethod}>action</button>
+				<span className="count"
+				style={style}
+				>{this.state.something}</span>
+			</div>
+			)
+		}
+	}
+
+- Using a CSS file for styling is generally a better approach than using JS
+- Using multiple JSX elements corresponding to the same component adds another instance of the component to the web app
+- Components are like JavaScript functions - they acccept inputs - properties, called props in React lingo
+- Components starting with lowercase letters are DOM tags (e.g. <div /> represents a HTML div tag)
+- Components starting with a capital letter are treated as user-defined components
+- Template literals are enclosed by back-ticks ` ` and are string literals allowing expressions:
+	var x = 'world'
+	console.log(`Hello, ${x}!`)
+	// Hello, World!
+- BEST PRACTICE: When changing state, arrow functions should be used:
+	increment() {
+		this.setState(
+			(prevState) = {
+				return {counter: prev.counter + by}
+		);
+	}
+- If we want to pass a parent method to a child component and allow it to take props as arguments, we do:
+	<button onClick={ () => this.props.someMethod(this.props.someProp) }>button_text</button>
+and not:
+	<button onClick={ this.props.someMethod(this.props.someProp) }>button_text</button>
+The former works, because the arrow function lets us pass a reference of the method with the prop passed as argument
+rather than actually calling the method.
+
+- onClick is an example of an EVENT HANDLER attribute
+
+
+
+***** Combining Spring Boot with React to Build Fullstack Todo Management Application *****
+- Any action performed on a button is called a CLICK EVENT in HTML terms
+- In React, an action performed on a component is called a SYNTHETICEVENT
+- CONTROLLED FIELD/CONTROLLED COMPONENT = a component where the entire change in the UI is dictated by the state
+- To avoid having to write methods for handling changes in each form element, we can write a single method used amongst different form elements
+- We can write components (in this case functions) to conditionally return elements when a state variable e.g. is true. 
+This is how we've added conditional login messages depending on successful or failed authentication against hardcoded credentials

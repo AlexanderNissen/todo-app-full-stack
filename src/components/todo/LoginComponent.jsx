@@ -19,8 +19,8 @@ class LoginComponent extends Component {
     return(
       <div>
         {/* If this.state.loginFailed is true, we call the ShowLoginFailedMessage function */}
-        <ShowLoginFailedMessage loginFailed={this.state.hasLoginFailed} />
-        <ShowLoginSuccessMessage loginSucceeded={this.state.showSuccessMessage} />
+        {this.state.hasLoginFailed && <div>Login failed</div>}
+        {this.state.showSuccessMessage && <div>Login successful</div>}
         Username: <input type="text" name="username" value={this.state.username} onChange={this.handleChange}/>
         Password: <input type="password" name="password" value={this.state.password} onChange={this.handleChange}/>
         <button onClick={this.loginClicked}>Login</button>
@@ -53,20 +53,6 @@ class LoginComponent extends Component {
       });
     }
   }
-}
-
-function ShowLoginFailedMessage(props) {
-  if(props.loginFailed) {
-    return <div>Login failed - invalid credentials</div>;
-  }
-  return null;
-}
-
-function ShowLoginSuccessMessage(props) {
-  if(props.loginSucceeded) {
-    return <div>Login successful</div>;
-  }
-  return null;
 }
 
 export default LoginComponent;
