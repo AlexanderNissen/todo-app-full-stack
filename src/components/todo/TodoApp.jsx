@@ -10,14 +10,23 @@ class TodoApp extends Component {
       <div className="TodoApp">
         <Router>
           <Routes>
-            <Route path="/" element={<LoginComponent/>}/>
-            <Route path="/login" element={<LoginComponent />}/>
-            <Route path="/welcome" element={<WelcomeComponent />}/>
+              <Route path="/" element={<LoginComponent/>}/>
+              <Route path="/login" element={<LoginComponent />}/>
+              <Route path="/welcome" element={<WelcomeComponent />}/>
+              <Route path="*" element={<ErrorComponent/>}/>
           </Routes>
         </Router>
       </div>
     );
   }
+}
+
+function ErrorComponent() {
+  return (
+    <div>
+      An error occured. The URL is not valid on this domain.
+    </div>
+  );
 }
 
 export default TodoApp;

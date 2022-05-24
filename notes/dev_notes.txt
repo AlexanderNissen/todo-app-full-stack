@@ -139,3 +139,7 @@ Instead, closest route match is chosen
 - <BrowserRouter> are a <Router> for use in web browsers
 - <Routes> is a container for for a nested tree of elements that renders the branch that best matches the current location
 - <Route> declares an element that should be rendered at a certain URL path. We render LoginComponent and WelcomeComponent
+- If we declare a <Route> element with path="*", the component passed to the attribute "element" will be rendered when there is no match with the other declared routes
+	<Route path="*" element=<ExampleComponent/>/>
+- In React Router V6+, the framework does not attempt to match incorrect URLs with the declared routes. Instead, the Route with path="*" is passed
+
