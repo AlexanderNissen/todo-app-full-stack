@@ -3,6 +3,8 @@ import LoginComponent from './LoginComponent.jsx';
 import './LoginComponent.css';
 import WelcomeComponent from './WelcomeComponent.jsx';
 import ListTodosComponent from './ListTodosComponent.jsx';
+import HeaderComponent from './HeaderComponent.jsx'
+import FooterComponent from './FooterComponent.jsx'
 import withParams from './WithParams.jsx';
 import withNavigation from './WithNavigation.jsx';
 import {BrowserRouter as Router, Routes, Route} from 'react-router-dom';
@@ -14,6 +16,7 @@ class TodoApp extends Component {
 
     return (
       <div className="TodoApp">
+        <HeaderComponent/>
         <Router>
           <Routes>
               <Route path="/" element={<LoginComponentWithNavigation/>}/>
@@ -23,6 +26,7 @@ class TodoApp extends Component {
               <Route path="*" element={<ErrorComponent/>}/>
           </Routes>
         </Router>
+        <FooterComponent/>
       </div>
     );
   }

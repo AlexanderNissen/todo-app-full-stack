@@ -1,5 +1,6 @@
 import React, { Component } from 'react';
 import './App.css';
+import './bootstrap.css'
 import FirstClassComponent from './components/learning-examples/FirstClassComponent';
 import SecondClassComponent from "./components/learning-examples/SecondClassComponent";
 import FirstFunctionComponent from "./components/learning-examples/FirstFunctionComponent";
