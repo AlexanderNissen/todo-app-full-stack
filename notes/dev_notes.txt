@@ -142,4 +142,11 @@ Instead, closest route match is chosen
 - If we declare a <Route> element with path="*", the component passed to the attribute "element" will be rendered when there is no match with the other declared routes
 	<Route path="*" element=<ExampleComponent/>/>
 - In React Router V6+, the framework does not attempt to match incorrect URLs with the declared routes. Instead, the Route with path="*" is passed
+- 
 - To create a dynamic route (using so-called 'route parameters'), we can write path="/:name", where 'name' is the route parameter
+The route parameter is a variable we can catch in our component and display (as a username in our case)
+- We can create a list using '[]'
+	- We can apply a function to each element using .forEach()
+	- We can map each element to elements in an array
+	- In the context of the todo app, we'd like to map each todo to JSX expressions (equivalent to HTML table elements in this particular use-case)
+
