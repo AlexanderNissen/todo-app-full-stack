@@ -142,4 +142,4 @@ Instead, closest route match is chosen
 - If we declare a <Route> element with path="*", the component passed to the attribute "element" will be rendered when there is no match with the other declared routes
 	<Route path="*" element=<ExampleComponent/>/>
 - In React Router V6+, the framework does not attempt to match incorrect URLs with the declared routes. Instead, the Route with path="*" is passed
-
+- To create a dynamic route (using so-called 'route parameters'), we can write path="/:name", where 'name' is the route parameter

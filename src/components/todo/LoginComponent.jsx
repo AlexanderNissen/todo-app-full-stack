@@ -40,10 +40,7 @@ class LoginComponent extends Component {
     // hardcoded authentication
     if(this.state.username==='Alexander' && this.state.password==='Nissen') {
       console.log("Login successful")
-      this.setState({
-        showSuccessMessage: true,
-        hasLoginFailed: false
-      });
+      this.props.navigate(`/welcome/${this.state.username}`)
     }
     else {
       console.log("Failed")
