@@ -145,8 +145,10 @@ Instead, closest route match is chosen
 - 
 - To create a dynamic route (using so-called 'route parameters'), we can write path="/:name", where 'name' is the route parameter
 The route parameter is a variable we can catch in our component and display (as a username in our case)
-- We can create a list using '[]'
+- We can create a list using '[]' in JS
 	- We can apply a function to each element using .forEach()
 	- We can map each element to elements in an array
 	- In the context of the todo app, we'd like to map each todo to JSX expressions (equivalent to HTML table elements in this particular use-case)
-
+- We can add a link on a page in two ways:
+	- <a href="/path_to_page"> which reloads the entire page
+	- <Link to="/path_to_page"> which doesn't reload the page. Ideal for a SPA
