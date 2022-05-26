@@ -1,4 +1,5 @@
 import React, {Component} from 'react';
+import AuthenticationService from './AuthenticationService.js';
 
 class LoginComponent extends Component {
   constructor(props) {
@@ -19,7 +20,7 @@ class LoginComponent extends Component {
     return(
       <div>
         <h1>Login</h1>
-        <div classname="container">
+        <div className="container">
           {/* If this.state.loginFailed is true, we call the ShowLoginFailedMessage function */}
           {this.state.hasLoginFailed && <div className="aler alert-warning">Login failed</div>}
           {this.state.showSuccessMessage && <div>Login successful</div>}
@@ -43,7 +44,7 @@ class LoginComponent extends Component {
   loginClicked() {
     // hardcoded authentication
     if(this.state.username==='Alexander' && this.state.password==='Nissen') {
-      console.log("Login successful")
+      AuthenticationService.registerSuccessfulLogin(this.state.username, this.state.password);
       this.props.navigate(`/welcome/${this.state.username}`)
     }
     else {
