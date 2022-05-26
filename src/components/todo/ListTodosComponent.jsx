@@ -15,31 +15,32 @@ class ListTodosComponent extends Component {
 
   render() {
     return (
-    <div>
+    <div className="container">
       <h1>List Todos</h1>
-      <table>
-        <thead>
-          <tr>
-            <th>ID</th>
-            <th>Description</th>
-            <th>Completed?</th>
-            <th>Date</th>
-          </tr>
-        </thead>
-        <tbody>
-          {
-            this.state.todos.map (
-              todo =>  
-                <tr>
-                  <td>{todo.id}</td>
-                  <td>{todo.description}</td>
-                  <td>{todo.done.toString()}</td>
-                  <td>{todo.targetDate.toString()}</td>
-                </tr>
-            )
-          }
-        </tbody>
-      </table>
+      <div className="table">
+        <table>
+          <thead>
+            <tr>
+              <th>Description</th>
+              <th>Completed?</th>
+              <th>Date</th>
+            </tr>
+          </thead>
+          <tbody>
+            {
+              this.state.todos.map (
+                todo =>  
+                  <tr>
+                    <td>{todo.description}</td>
+                    <td>{todo.done.toString()}</td>
+                    <td>{todo.targetDate.toString()}</td>
+                  </tr>
+              )
+            }
+          </tbody>
+        </table>
+
+      </div>
     </div>
     );
   }
