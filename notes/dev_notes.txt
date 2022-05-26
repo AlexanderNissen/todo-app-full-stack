@@ -152,3 +152,5 @@ The route parameter is a variable we can catch in our component and display (as 
 - We can add a link on a page in two ways:
 	- <a href="/path_to_page"> which reloads the entire page
 	- <Link to="/path_to_page"> which doesn't reload the page. Ideal for a SPA
+- We import our Bootstrap template through a URL and drop it directly into our project ("src/bootstrap.css")
+
