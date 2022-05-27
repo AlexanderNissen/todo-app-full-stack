@@ -6,6 +6,7 @@ import ListTodosComponent from './ListTodosComponent.jsx';
 import HeaderComponent from './HeaderComponent.jsx'
 import FooterComponent from './FooterComponent.jsx'
 import LogoutComponent from './LogoutComponent.jsx'
+import ErrorComponent from './ErrorComponent.jsx';
 import AuthenticatedRoute from './AuthenticatedRoute.jsx';
 import withParams from './WithParams.jsx';
 import withNavigation from './WithNavigation.jsx';
@@ -46,14 +47,6 @@ class TodoApp extends Component {
       </div>
     );
   }
-}
-
-function ErrorComponent() {
-  return (
-    <div>
-      An error occured. The URL is not valid on this domain.
-    </div>
-  );
 }
 
 export default TodoApp;

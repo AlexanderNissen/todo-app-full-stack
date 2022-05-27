@@ -159,3 +159,10 @@ The route parameter is a variable we can catch in our component and display (as 
 	let values = [1, 2, 3];
 	function sum(a, b, c) {return a + b + c;}
 	sum(...values);
+- We can ensure access to pages/routes is only possible by wrapping the component passed to 'element' in an authenticating component
+        <Route path="/todos" element={
+	<AuthenticatedRoute>
+	    <ListTodosComponent/>
+	</AuthenticatedRoute>
+	}/>
+- 
