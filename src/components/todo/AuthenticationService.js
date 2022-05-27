@@ -4,6 +4,9 @@ class AuthenticationService {
     sessionStorage.setItem('authenticatedUser', username);
   }
 
+  logout(username) {
+    sessionStorage.removeItem('authenticatedUser');
+  }
 }
 
 export default new AuthenticationService();
