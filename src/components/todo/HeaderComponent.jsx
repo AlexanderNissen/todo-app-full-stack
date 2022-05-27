@@ -4,20 +4,23 @@ import AuthenticationService from "./AuthenticationService";
 
 class HeaderComponent extends Component {
   render() {
+    const isUserLoggedIn = AuthenticationService.isUserLoggedIn();
+    // console.log(isUserLoggedIn);
+
     return(
-    <header>
-      <nav className="navbar navbar-expand-md navbar-dark bg-dark">
-        <div><a href="http://alexadernissen.com" className="navbar-brand">Alexander Nissen</a></div>
-        <ul className="navbar-nav">
-          <li><Link className="nav-link" to="/welcome/AlexanderNissen">Home</Link></li>
-          <li><Link className="nav-link" to="/todos">Todos</Link></li>
-        </ul>
-        <ul className="navbar-nav navbar-collapse justify-content-end">
-          <li><Link className="nav-link" to="/login">Login</Link></li>
-          <li><Link className="nav-link" to="/logout" onClick={AuthenticationService.logout}>Logout</Link></li>
-        </ul>
-      </nav>
-    </header>
+      <header>
+        <nav className="navbar navbar-expand-md navbar-dark bg-dark">
+          <div><a href="http://alexadernissen.com" className="navbar-brand">Alexander Nissen</a></div>
+          <ul className="navbar-nav">
+            {isUserLoggedIn && <li><Link className="nav-link" to="/welcome/AlexanderNissen">Home</Link></li>}
+            {isUserLoggedIn && <li><Link className="nav-link" to="/todos">Todos</Link></li>}
+          </ul>
+          <ul className="navbar-nav navbar-collapse justify-content-end">
+            {!isUserLoggedIn && <li><Link className="nav-link" to="/login">Login</Link></li>}
+            {isUserLoggedIn && <li><Link className="nav-link" to="/logout" onClick={AuthenticationService.logout}>Logout</Link></li>}
+          </ul>
+        </nav>
+      </header>
     );
   }
 }
