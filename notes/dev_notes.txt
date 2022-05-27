@@ -155,4 +155,7 @@ The route parameter is a variable we can catch in our component and display (as 
 - We import our Bootstrap template through a URL and drop it directly into our project ("src/bootstrap.css")
 - sessionStorage property allows access session Storage object for the current origin -> we can set key when user logs in and remove it when user logs out. This session storage resets when a browser window is closed
 - localStorage, on the other hand, persists until deleted. Even if the browser is closed
-- 
+- '...' is the spread operator in JS and is equivalent to the unpacking operator in Python:
+	let values = [1, 2, 3];
+	function sum(a, b, c) {return a + b + c;}
+	sum(...values);

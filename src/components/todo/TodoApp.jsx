@@ -6,6 +6,7 @@ import ListTodosComponent from './ListTodosComponent.jsx';
 import HeaderComponent from './HeaderComponent.jsx'
 import FooterComponent from './FooterComponent.jsx'
 import LogoutComponent from './LogoutComponent.jsx'
+import AuthenticatedRoute from './AuthenticatedRoute.jsx';
 import withParams from './WithParams.jsx';
 import withNavigation from './WithNavigation.jsx';
 import {BrowserRouter as Router, Routes, Route} from 'react-router-dom';
@@ -23,9 +24,21 @@ class TodoApp extends Component {
             <Routes>
                 <Route path="/" element={<LoginComponentWithNavigation/>}/>
                 <Route path="/login" element={<LoginComponentWithNavigation/>}/>
-                <Route path="/welcome/:name" element={<WelcomeComponentWithParams/>}/>
-                <Route path="/todos" element={<ListTodosComponent/>}/>
-                <Route path="/logout" element={<LogoutComponent/>}/>
+                <Route path="/welcome/:name" element={
+                <AuthenticatedRoute>
+                  <WelcomeComponentWithParams/>
+                </AuthenticatedRoute>
+                }/>
+                <Route path="/todos" element={
+                <AuthenticatedRoute>
+                  <ListTodosComponent/>
+                </AuthenticatedRoute>
+                }/>
+                <Route path="/logout" element={
+                <AuthenticatedRoute>
+                  <LogoutComponent/>
+                </AuthenticatedRoute>
+                }/>
                 <Route path="*" element={<ErrorComponent/>}/>
             </Routes>
           <FooterComponent/>
