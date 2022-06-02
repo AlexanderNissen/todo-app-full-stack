@@ -2,6 +2,12 @@ import React, { Component } from 'react';
 import { Link } from 'react-router-dom';
 
 class WelcomeComponent extends Component {
+  constructor() {
+    super();
+
+    this.retrieveWelcomeMessage = this.retrieveWelcomeMessage.bind(this);
+  }
+
   render() {
     return (
       <>
@@ -14,8 +20,17 @@ class WelcomeComponent extends Component {
             We want to avoid this for a SPA (single page application)
           */}
         </div>
+
+        <div>
+          Click here to get a customized welcome message.
+          <button onClick={this.retrieveWelcomeMessage} className="btn btn-success">Get welcome message</button>
+        </div>
       </>
     );
+  }
+
+  retrieveWelcomeMessage() {
+    console.log('retrieve clicked')
   }
 }
 
