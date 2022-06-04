@@ -5,8 +5,12 @@ import HelloWorldService from '../../api/HelloWorldService';
 class WelcomeComponent extends Component {
   constructor() {
     super();
+    this.state = {
+      welcomeMessage: ''
+    }
 
     this.retrieveWelcomeMessage = this.retrieveWelcomeMessage.bind(this);
+    this.handleSuccessfulResponse = this.handleSuccessfulResponse.bind(this);
   }
 
   render() {
@@ -26,14 +30,24 @@ class WelcomeComponent extends Component {
           Click here to get a customized welcome message.
           <button onClick={this.retrieveWelcomeMessage} className="btn btn-success">Get welcome message</button>
         </div>
+
+        <div>
+          {this.state.welcomeMessage}
+        </div>
       </>
     );
   }
 
   retrieveWelcomeMessage() {
     HelloWorldService.executeHelloWorldService()
-    .then(response => console.log(response)) // Successful response
+    .then(response => this.handleSuccessfulResponse(response)) // Successful response
     // .catch()
+  }
+
+  handleSuccessfulResponse(response) {
+    this.setState({
+      welcomeMessage: response.data
+    })
   }
 }
 
