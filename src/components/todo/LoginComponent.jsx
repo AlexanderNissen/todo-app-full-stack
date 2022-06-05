@@ -22,7 +22,7 @@ class LoginComponent extends Component {
         <h1>Login</h1>
         <div className="container">
           {/* If this.state.loginFailed is true, we call the ShowLoginFailedMessage function */}
-          {this.state.hasLoginFailed && <div className="aler alert-warning">Login failed</div>}
+          {this.state.hasLoginFailed && <div className="alert alert-warning">Login failed</div>}
           {this.state.showSuccessMessage && <div>Login successful</div>}
           Username: <input type="text" name="username" value={this.state.username} onChange={this.handleChange}/>
           Password: <input type="password" name="password" value={this.state.password} onChange={this.handleChange}/>
@@ -43,7 +43,7 @@ class LoginComponent extends Component {
 
   loginClicked() {
     // hardcoded authentication
-    if(this.state.username==='Alexander' && this.state.password==='Nissen') {
+    if(this.state.username==='Alexander' || this.state.username==='Error' && this.state.password==='Nissen') {
       AuthenticationService.registerSuccessfulLogin(this.state.username, this.state.password);
       this.props.navigate(`/welcome/${this.state.username}`)
     }

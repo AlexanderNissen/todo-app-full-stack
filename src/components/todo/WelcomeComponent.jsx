@@ -6,11 +6,14 @@ class WelcomeComponent extends Component {
   constructor() {
     super();
     this.state = {
-      welcomeMessage: ''
+      welcomeMessage: '',
+      responseSuccessful: false,
+      responseFailed: false
     }
 
     this.retrieveWelcomeMessage = this.retrieveWelcomeMessage.bind(this);
     this.handleSuccessfulResponse = this.handleSuccessfulResponse.bind(this);
+    this.handleError = this.handleError.bind(this);
   }
 
   render() {
@@ -18,6 +21,8 @@ class WelcomeComponent extends Component {
       <>
         <h1>Welcome</h1>
         <div className="container">
+          {this.state.responseFailed && <div className='alert alert-warning'>{this.state.welcomeMessage}</div>}
+          {this.state.responseSuccessful && <div className='alert alert-success'>{this.state.welcomeMessage}</div>}
           Welcome {this.props.params.name} <br/>
           You can manage your todos <Link to='/todos'>here</Link>.
           {/*
@@ -29,10 +34,6 @@ class WelcomeComponent extends Component {
         <div>
           Click here to get a customized welcome message.
           <button onClick={this.retrieveWelcomeMessage} className="btn btn-success">Get welcome message</button>
-        </div>
-
-        <div>
-          {this.state.welcomeMessage}
         </div>
       </>
     );
@@ -47,13 +48,22 @@ class WelcomeComponent extends Component {
 
     HelloWorldService.executeHelloWorldPathVariableService(this.props.params.name)
     .then(response => this.handleSuccessfulResponse(response))
-    // .catch()
+    .catch(error => this.handleError(error))
   }
 
   handleSuccessfulResponse(response) {
     console.log(response.data)
     this.setState({
-      welcomeMessage: response.data.message
+      welcomeMessage: response.data.message,
+      responseSuccessful: true
+    })
+  }
+
+  handleError(error) {
+    console.log(error);
+    this.setState({
+      welcomeMessage: error.response.data.message,
+      responseFailed: true
     })
   }
 }
