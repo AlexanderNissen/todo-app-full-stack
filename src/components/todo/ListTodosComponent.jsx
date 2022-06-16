@@ -1,6 +1,7 @@
 import { Component } from 'react';
 import TodoDataService from '../../api/todo/TodoDataService.js';
 import AuthenticationService from './AuthenticationService.js';
+import '../../bootstrap.css'
 
 class ListTodosComponent extends Component {
   constructor(props) {
@@ -8,12 +9,11 @@ class ListTodosComponent extends Component {
     super(props);
 
     this.state = {
-      todos: [
-        // {id: 1, description: 'Learn computer architecture', done: false, targetDate: new Date()},
-        // {id: 2, description: 'Learn React', done: false, targetDate: new Date()},
-        // {id: 3, description: 'Learn Spring Boot', done: false, targetDate: new Date()}
-      ]
+      todos: [],
+      message: null
     }
+    this.deleteTodoClicked = this.deleteTodoClicked.bind(this);
+    this.refreshTodos = this.refreshTodos.bind(this);
   }
 
   componentWillUnmount() {
@@ -24,11 +24,15 @@ class ListTodosComponent extends Component {
     console.log('shouldComponentUpdate')
     console.log(nextProps)
     console.log(nextState)
-    return false;
+    return true;
   }
 
   componentDidMount() {
     console.log('componentDidMount')
+    this.refreshTodos();
+  }
+
+  refreshTodos() {
     let username = AuthenticationService.getLoggedInUsername()
     TodoDataService.retrieveAllTodos(username)
       .then(
@@ -38,6 +42,19 @@ class ListTodosComponent extends Component {
           this.setState({todos: response.data})
         }
       )
+
+  }
+
+  deleteTodoClicked(id) {
+    let username = AuthenticationService.getLoggedInUsername();
+    // console.log(id + " " + username);
+    TodoDataService.deleteTodo(username, id)
+      .then(
+        response => {
+          this.setState({message: `Deletion of todo ${id} successful`});
+          this.refreshTodos();
+        }
+      )
   }
 
   render() {
@@ -45,6 +62,7 @@ class ListTodosComponent extends Component {
     return (
     <div className="container">
       <h1>List Todos</h1>
+      {this.state.message && <div className='alert alert-success'>{this.state.message}</div>}
       <div className="table">
         <table>
           <thead>
@@ -52,6 +70,7 @@ class ListTodosComponent extends Component {
               <th>Description</th>
               <th>Completed?</th>
               <th>Date</th>
+              <th>Delete</th>
             </tr>
           </thead>
           <tbody>
@@ -62,6 +81,7 @@ class ListTodosComponent extends Component {
                     <td>{todo.description}</td>
                     <td>{todo.isDone.toString()}</td>
                     <td>{todo.targetDate.toString()}</td>
+                    <td><button className='btn btn-warning' onClick={() => this.deleteTodoClicked(todo.id)}>Delete</button></td>
                   </tr>
               )
             }
