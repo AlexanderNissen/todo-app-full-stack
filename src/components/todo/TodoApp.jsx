@@ -8,6 +8,7 @@ import FooterComponent from './FooterComponent.jsx'
 import LogoutComponent from './LogoutComponent.jsx'
 import ErrorComponent from './ErrorComponent.jsx';
 import AuthenticatedRoute from './AuthenticatedRoute.jsx';
+import TodoComponent from './TodoComponent.jsx';
 import withParams from './WithParams.jsx';
 import withNavigation from './WithNavigation.jsx';
 import {BrowserRouter as Router, Routes, Route} from 'react-router-dom';
@@ -17,6 +18,8 @@ class TodoApp extends Component {
     const LoginComponentWithNavigation = withNavigation(LoginComponent)
     const WelcomeComponentWithParams = withParams(WelcomeComponent)
     const HeaderComponentWithNavigation = withNavigation(HeaderComponent);
+    const ListTodosComponentWithNavigation = withNavigation(ListTodosComponent)
+    const TodoComponentWithParamsAndNavigation = withParams(withNavigation(TodoComponent));
 
     return (
       <div className="TodoApp">
@@ -30,9 +33,14 @@ class TodoApp extends Component {
                   <WelcomeComponentWithParams/>
                 </AuthenticatedRoute>
                 }/>
+                <Route path="/todos/:id" element={
+                  <AuthenticatedRoute>
+                    <TodoComponentWithParamsAndNavigation/>
+                  </AuthenticatedRoute>
+                }/>
                 <Route path="/todos" element={
                 <AuthenticatedRoute>
-                  <ListTodosComponent/>
+                  <ListTodosComponentWithNavigation/>
                 </AuthenticatedRoute>
                 }/>
                 <Route path="/logout" element={
