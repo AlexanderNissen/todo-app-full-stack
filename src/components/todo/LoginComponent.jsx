@@ -43,7 +43,7 @@ class LoginComponent extends Component {
 
   loginClicked() {
     // hardcoded authentication
-    if(this.state.username==='Alexander' || this.state.username==='Error' && this.state.password==='Nissen') {
+    if((this.state.username==='Alexander' || this.state.username==='Error') && this.state.password==='Nissen') {
       AuthenticationService.registerSuccessfulLogin(this.state.username, this.state.password);
       this.props.navigate(`/welcome/${this.state.username}`)
     }
