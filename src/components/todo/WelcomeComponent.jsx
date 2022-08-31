@@ -60,9 +60,18 @@ class WelcomeComponent extends Component {
   }
 
   handleError(error) {
-    console.log(error);
+    console.log(error); // May be undefined
+    let errorMessage = ""
+
+    if (error.message) { // No response is returned if network error or no auth -> error.message is null
+      errorMessage += error.message
+    }
+
+    if (error.response && error.response.data) { // 
+      errorMessage += error.response.data.message
+    }
     this.setState({
-      welcomeMessage: error.response.data.message,
+      welcomeMessage: errorMessage,
       responseFailed: true
     })
   }
