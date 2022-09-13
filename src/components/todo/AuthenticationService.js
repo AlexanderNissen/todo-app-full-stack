@@ -8,6 +8,13 @@ class AuthenticationService {
     })
   }
 
+  executeJwtAuthService(username, password) {
+    return axios.post('http://localhost:8080/authenticate', {
+      username,
+      password
+    })
+  }
+
   createBasicAuthToken(username, password) {
     return 'Basic ' + window.btoa(username + ':' + password)
   }
@@ -18,6 +25,16 @@ class AuthenticationService {
     console.log('registerSuccessfulLogin');
     sessionStorage.setItem('authenticatedUser', username);
     this.setupAxiosInterceptors(basicAuthHeader);
+  }
+
+  registerSuccesfulLoginForJwt(username, token) {
+    console.log('registerSuccesfulLoginForJwt')
+    sessionStorage.setItem('authenticatedUser', username)
+    this.setupAxiosInterceptors(this.createJwtToken(token))
+  }
+
+  createJwtToken(token) {
+    return 'Bearer ' + token
   }
 
   logout(username) {
@@ -38,14 +55,14 @@ class AuthenticationService {
     return user
   }
 
-  setupAxiosInterceptors(basicAuthHeader) {
-    console.log(basicAuthHeader)
+  setupAxiosInterceptors(token) {
+    console.log(token)
 
     axios.interceptors.request.use(
       // config is the configuration of the request. The interceptors job is to add the auth header to the request
       (config) => {
         if (this.isUserLoggedIn()) {
-          config.headers.authorization = basicAuthHeader
+          config.headers.authorization = token
         }
 
         return config
