@@ -1,10 +1,10 @@
 import axios from 'axios';
-import { API_URL } from '../../Constants';
+import { API_URL, JPA_API_URL } from '../../Constants';
 
 class TodoDataService {
 
   retrieveAllTodos(username) {
-    return axios.get(`${API_URL}/users/${username}/todos`);
+    return axios.get(`${JPA_API_URL}/users/${username}/todos`);
   }
 
   deleteTodo(name, id) {
@@ -12,7 +12,7 @@ class TodoDataService {
   }
 
   retrieveTodo(username, id) {
-    return axios.get(`${API_URL}/users/${username}/todos/${id}`);
+    return axios.get(`${JPA_API_URL}/users/${username}/todos/${id}`);
   }
 
   updateTodo(username, id, todo) {
